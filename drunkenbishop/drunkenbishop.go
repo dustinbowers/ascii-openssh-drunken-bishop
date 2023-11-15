@@ -94,21 +94,10 @@ func (db *DrunkenBishop) generateLabel(label string) string {
 
 func (db *DrunkenBishop) getCharacterMap() []rune {
 	return []rune {
-		0: ' ',
-		1: '.',
-		2: 'o',
-		3: '+',
-		4: '=',
-		5: '*',
-		6: 'B',
-		7: 'O',
-		8: 'X',
-		9: '@',
-		10: '%',
-		11: '&',
-		12: '#',
-		13: '/',
-		14: '^',
+		0: ' ', 1: '.', 2: 'o', 3: '+',
+		4: '=', 5: '*', 6: 'B', 7: 'O',
+		8: 'X', 9: '@', 10: '%', 11: '&',
+		12: '#', 13: '/', 14: '^',
 	}
 }
 
