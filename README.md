@@ -2,7 +2,7 @@
 Create an OpenSSH ASCII fingerprint from a Hex string
 
 ## Usage
-```
+```go
 import "fmt"
 import "github.com/dustinbowers/ascii-openssh-drunken-bishop/drunkenbishop"
 
