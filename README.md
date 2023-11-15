@@ -31,8 +31,6 @@ will produce this output:
 |     . .         |
 |                 |
 +---[Test Hash]---+
-
-
 ```
 
 ## More info
