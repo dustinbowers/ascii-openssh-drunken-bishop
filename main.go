@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/dustinbowers/ascii-openssh-drunken-bishop/drunkenbishop"
 	"os"
+
+	"github.com/dustinbowers/ascii-openssh-drunken-bishop/drunkenbishop"
 )
 
 func main() {
 	if len(os.Args) == 1 || len(os.Args) > 2 {
-		fmt.Printf("Usage: %s <filename>\n", os.Args[0])
+		fmt.Printf("Usage: %s <hash>\n", os.Args[0])
 		os.Exit(1)
 		return
 	}

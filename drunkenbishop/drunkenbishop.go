@@ -11,12 +11,12 @@ type Position struct {
 }
 
 type DrunkenBishop struct {
-	fingerprint string
-	topLabel string
-	bottomLabel string
-	w, h int
+	fingerprint       string
+	topLabel          string
+	bottomLabel       string
+	w, h              int
 	startPos, currPos Position
-	board [][]int
+	board             [][]int
 }
 
 func NewDrunkenBishop() DrunkenBishop {
@@ -24,7 +24,7 @@ func NewDrunkenBishop() DrunkenBishop {
 	return db
 }
 
-func (db *DrunkenBishop) Reset() {
+func (db *DrunkenBishop) reset() {
 	db.w = 17 // OpenSSH standard dimensions
 	db.h = 9
 	db.startPos = Position{
@@ -48,7 +48,7 @@ func (db *DrunkenBishop) SetBottomLabel(label string) {
 }
 
 func (db *DrunkenBishop) ToAscii(fingerprint string) (string, error) {
-	db.Reset()
+	db.reset()
 	db.fingerprint = fingerprint
 	err := db.walkFingerprint()
 	if err != nil {
@@ -79,7 +79,7 @@ func (db *DrunkenBishop) ToAscii(fingerprint string) (string, error) {
 }
 
 func (db *DrunkenBishop) generateLabel(label string) string {
-	if len(label) > db.w - 3 {
+	if len(label) > db.w-3 {
 		label = fmt.Sprintf("%s", label[:db.w-3])
 	}
 	if len(label) > 0 {
@@ -87,13 +87,13 @@ func (db *DrunkenBishop) generateLabel(label string) string {
 	}
 	np := db.w - len(label)
 	lp := int(float64(np) / 2.0)
-	rp := int(float64(np) / 2.0 + 0.5)
+	rp := int(float64(np)/2.0 + 0.5)
 	padded := fmt.Sprintf("+%s%s%s+", strings.Repeat("-", lp), label, strings.Repeat("-", rp))
 	return padded
 }
 
 func (db *DrunkenBishop) getCharacterMap() []rune {
-	return []rune {
+	return []rune{
 		0: ' ', 1: '.', 2: 'o', 3: '+',
 		4: '=', 5: '*', 6: 'B', 7: 'O',
 		8: 'X', 9: '@', 10: '%', 11: '&',
@@ -103,8 +103,8 @@ func (db *DrunkenBishop) getCharacterMap() []rune {
 
 func (db *DrunkenBishop) walkFingerprint() error {
 	fp := db.fingerprint
-	fp = strings.Replace(fp, ":", "", -1)
-	fp = strings.Replace(fp, "-", "", -1)
+	fp = strings.ReplaceAll(fp, ":", "")
+	fp = strings.ReplaceAll(fp, "-", "")
 
 	fpBytes, err := hex.DecodeString(fp)
 	if err != nil {
@@ -115,10 +115,10 @@ func (db *DrunkenBishop) walkFingerprint() error {
 		for i := 0; i < 4; i++ {
 			dx := -1
 			dy := -1
-			if b>>(i*2) & 0b1 == 1 { // left - right bit
+			if b>>(i*2)&0b1 == 1 { // left - right bit
 				dx = 1
 			}
-			if b>>(i*2+1) & 0b1 == 1 { // up - down bit
+			if b>>(i*2+1)&0b1 == 1 { // up - down bit
 				dy = 1
 			}
 			x := db.currPos.x + dx
@@ -135,7 +135,7 @@ func (db *DrunkenBishop) walkFingerprint() error {
 			if y == db.h {
 				y = db.h - 1
 			}
-			db.currPos = Position {x, y}
+			db.currPos = Position{x, y}
 			db.board[x][y] += 1
 		}
 	}
