@@ -2,6 +2,9 @@
 Create an OpenSSH ASCII fingerprint from a Hex string
 
 ## Usage
+From a terminal: `go run main.go <hash>`
+
+Or in code:  
 ```go
 import "fmt"
 import "github.com/dustinbowers/ascii-openssh-drunken-bishop/drunkenbishop"
